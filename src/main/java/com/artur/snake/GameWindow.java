@@ -1,4 +1,6 @@
-package com.artur.snake.application.views;
+package com.artur.snake;
+
+import com.artur.snake.entities.Entity;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,14 +19,25 @@ public class GameWindow extends JFrame {
         add(new JPanel(), BorderLayout.EAST);
         add(new JPanel(), BorderLayout.SOUTH);
         add(buildGamePanel(), BorderLayout.CENTER);
-    }
-
-    public void showWindow() {
         setVisible(true);
     }
 
+    public void addEntity(Entity entity) {
+        this.gamePanel.add(entity.getComponent());
+        revalidate();
+        repaint();
+    }
+    
+    public int getGamePanelWidth(){
+        return this.gamePanel.getWidth();
+    }
+    
+    public int getGamePanelHeight(){
+        return this.gamePanel.getHeight();
+    }
+
     private void configWindow() {
-        setSize(600, 400);
+        setSize(500, 400);
         setTitle("Snake Game By Artur");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
@@ -39,14 +52,11 @@ public class GameWindow extends JFrame {
         return panel;
     }
 
-
     private JPanel buildGamePanel() {
+        gamePanel.setLayout(null);
         gamePanel.setBackground(Color.DARK_GRAY);
         return gamePanel;
     }
-
-
-
 
 }
 
