@@ -1,7 +1,11 @@
 package com.artur.snake;
 
+import com.artur.snake.application.views.GameWindow;
+
 public class Main {
     public static void main(String[] args) {
-        System.out.println("");
+        GameWindow window = new GameWindow();
+        window.showWindow();
     }
+
 }
