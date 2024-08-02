@@ -12,12 +12,10 @@ public class GameEngine implements Runnable {
     private boolean exit = false;
 
     public GameEngine(GameWindow window) {
-        this.snack = new SnackEntity(GameHelper.getRandomNumber(0, 425), GameHelper.getRandomNumber(0,375));
+        this.snack = new SnackEntity(0, 0);
         this.snake = new SnakeEntity();
         this.window = window;
         this.window.addEntity(snack);
-
-
     }
 
     @Override
@@ -40,18 +38,5 @@ public class GameEngine implements Runnable {
         }
     }
 
-
-    /*
-    private static int getRandomNumber(int min, int max) {
-        return ThreadLocalRandom.current().nextInt(min, max + 1);
-    }
-
-    private static void sleep(int seconds) {
-        try {
-            Thread.sleep(seconds * 1000L);
-        } catch (Exception ignored) {
-        }
-    }
-     */
 
 }

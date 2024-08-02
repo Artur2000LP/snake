@@ -10,8 +10,8 @@ public class GameHelper {
     }
     public static  void  sleep(int seconds){
         try {
-            int val = seconds * 1000 ;
-            Thread.sleep(val);
+            int millis = seconds * 1000 ;
+            Thread.sleep(millis);
         }catch (Exception ignored){
 
         }
