@@ -26,6 +26,18 @@ public class Snake {
         }
     }
 
+    public int getHeadWidth() {
+        if (body.isEmpty())
+            return 0;
+        return body.get(0).getWidth();
+    }
+
+    public int getHeadHeight() {
+        if (body.isEmpty())
+            return 0;
+        return body.get(0).getHeight();
+    }
+
     public List<Entity> getBody() {
         return body.stream().map(bodyEntity -> (Entity) bodyEntity).toList();
     }
