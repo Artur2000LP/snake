@@ -5,8 +5,8 @@ import com.artur.snake.DefaultProvider;
 
 import javax.swing.*;
 
-public class Entity {
-    private final JButton component;
+public class Entity implements Movable {
+    protected final JButton component;
     private int _x;
     private int _y;
     private final int _width;
@@ -26,18 +26,22 @@ public class Entity {
         this._velocity = Math.max(velocity, 0);
     }
 
+		@Override
     public void moveUp() {
         setPosition(_x, Math.max(_y - _velocity, 0));
     }
 
+		@Override
     public void moveDown() {
         setPosition(_x, Math.max(_y + _velocity, 0));
     }
 
+		@Override
     public void moveLeft() {
         setPosition(Math.max(_x - _velocity, 0), _y);
     }
 
+		@Override
     public void moveRight() {
         setPosition(Math.max(_x + _velocity, 0), _y);
     }
@@ -50,12 +54,16 @@ public class Entity {
         return _y;
     }
 
-    public int getWidth(){
+    public int getWidth() {
         return this._width;
     }
 
-    public int getHeight(){
+    public int getHeight() {
         return this._height;
+    }
+
+    public int getVelocity(){
+        return this._velocity;
     }
 
     public void setPosition(int x, int y) {
@@ -64,7 +72,7 @@ public class Entity {
         component.setBounds(x, y, _width, _height);
     }
 
-    public JButton getComponent(){
+    public JButton getComponent() {
         return component;
     }
 
