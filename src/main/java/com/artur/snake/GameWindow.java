@@ -14,7 +14,7 @@ public class GameWindow extends JFrame implements MouseMotionListener {
 
     private final JLabel deathsLabel = new JLabel("Muertes: ");
     private final JLabel scoreLabel = new JLabel("Puntos: ");
-    private final JLabel timeLabel = new JLabel("");
+    private final JLabel timeLabel = new JLabel("0");
     private final JPanel gamePanel = new JPanel();
 
     private int mouseX = 0, mouseY = 0;
@@ -67,9 +67,15 @@ public class GameWindow extends JFrame implements MouseMotionListener {
 
     private JPanel buildLabelsPanel() {
         JPanel panel = new JPanel();
-        panel.add(deathsLabel);
-        panel.add(scoreLabel);
-        panel.add(timeLabel);
+        JPanel labelsContainer = new JPanel();
+        labelsContainer.setLayout(new BorderLayout());
+        panel.setLayout(new BorderLayout());
+        labelsContainer.add(deathsLabel, BorderLayout.WEST);
+        labelsContainer.add(scoreLabel, BorderLayout.CENTER);
+        labelsContainer.add(timeLabel, BorderLayout.EAST);
+        panel.add(new JPanel(), BorderLayout.WEST);
+        panel.add(new JPanel(), BorderLayout.EAST);
+        panel.add(labelsContainer, BorderLayout.CENTER);
         return panel;
     }
 
@@ -87,9 +93,7 @@ public class GameWindow extends JFrame implements MouseMotionListener {
     }
 
     @Override
-    public void mouseDragged(MouseEvent e) {
-
-    }
+    public void mouseDragged(MouseEvent e) {}
 
 }
 
