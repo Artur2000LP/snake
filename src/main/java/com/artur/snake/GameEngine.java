@@ -44,9 +44,9 @@ public class GameEngine implements Runnable {
 
     private void moveSnake() {
         while (!exit) {
-            System.out.println("Mouse Position: (" + window.getMouseX() + ", " + window.getMouseY() + ")");
             int mouseX = Math.min(window.getMouseX(), window.getGamePanelWidth() - snake.getHeadWidth());
             int mouseY = Math.min(window.getMouseY(), window.getGamePanelHeight() - snake.getHeadHeight());
+            System.out.println("Mouse Position: (" + mouseX + ", " + mouseY + ")");
             snake.moveTo(mouseX, mouseY);
             GameHelper.sleepMillis(DefaultProvider.SNAKE_MOVEMENT_TIMING_MILLIS);
         }
