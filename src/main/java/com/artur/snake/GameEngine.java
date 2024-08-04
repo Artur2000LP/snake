@@ -10,6 +10,8 @@ public class GameEngine implements Runnable {
     private final Snake snake;
     private final GameWindow window;
     private boolean exit = false;
+    private int mouseX = 0;
+    private int mouseY = 0;
 
     public GameEngine(GameWindow window) {
         this.snack = new SnackEntity(0, 0);
@@ -45,8 +47,8 @@ public class GameEngine implements Runnable {
     private void moveSnake() {
         while (!exit) {
             System.out.println("Mouse Position: (" + window.getMouseX() + ", " + window.getMouseY() + ")");
-            int mouseX = Math.min(window.getMouseX(), window.getGamePanelWidth() - snake.getHeadWidth());
-            int mouseY = Math.min(window.getMouseY(), window.getGamePanelHeight() - snake.getHeadHeight());
+            mouseX = Math.min(window.getMouseX(), window.getGamePanelWidth() - snake.getHeadWidth());
+            mouseY = Math.min(window.getMouseY(), window.getGamePanelHeight() - snake.getHeadHeight());
             snake.moveTo(mouseX, mouseY);
             GameHelper.sleepMillis(DefaultProvider.SNAKE_MOVEMENT_TIMING_MILLIS);
         }
