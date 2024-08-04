@@ -10,6 +10,8 @@ public class GameEngine implements Runnable {
     private final Snake snake;
     private final GameWindow window;
     private boolean exit = false;
+    private int time = 1;
+
 
     public GameEngine(GameWindow window) {
         this.snack = new SnackEntity(0, 0);
@@ -23,6 +25,7 @@ public class GameEngine implements Runnable {
     public void run() {
         new Thread(this::moveSnake).start();
         new Thread(this::randomSnack).start();
+        new Thread(this::timer).start();
         while (!exit) {
             System.out.println("soy infinito");
             GameHelper.sleepSeconds(1000);
@@ -49,6 +52,16 @@ public class GameEngine implements Runnable {
             System.out.println("Mouse Position: (" + mouseX + ", " + mouseY + ")");
             snake.moveTo(mouseX, mouseY);
             GameHelper.sleepMillis(DefaultProvider.SNAKE_MOVEMENT_TIMING_MILLIS);
+        }
+    }
+
+    private void timer(){
+        while (!exit) {
+            if(time == 6) time = 1;
+            window.setTime(time);
+            GameHelper.sleepSeconds(1);
+            time++;
+
         }
     }
 

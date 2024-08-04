@@ -95,6 +95,10 @@ public class GameWindow extends JFrame implements MouseMotionListener {
     @Override
     public void mouseDragged(MouseEvent e) {}
 
+    public void setTime(int time) {
+        timeLabel.setText(String.valueOf(time));
+    }
+
 }
 
 
