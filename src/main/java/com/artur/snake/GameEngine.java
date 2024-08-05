@@ -10,7 +10,7 @@ public class GameEngine implements Runnable {
     private final Snake snake;
     private final GameWindow window;
     private boolean exit = false;
-    private int time = 1;
+    private int time = 0;
     private int mouseX = 0;
     private int mouseY = 0;
 
@@ -25,7 +25,6 @@ public class GameEngine implements Runnable {
     @Override
     public void run() {
         new Thread(this::moveSnake).start();
-        new Thread(this::randomSnack).start();
         new Thread(this::timer).start();
         while (!exit) {
             System.out.println("soy infinito");
@@ -33,17 +32,11 @@ public class GameEngine implements Runnable {
         }
     }
 
-    private void randomSnack() {
-        while (!exit) {
-            int x = GameHelper.getRandomNumber(0, window.getGamePanelWidth() - snack.getWidth());
-            int y = GameHelper.getRandomNumber(0, window.getGamePanelHeight() - snack.getHeight());
-            this.snack.setPosition(x, y);
-            System.out.println("snack x: " + x);
-            System.out.println("snack y: " + y);
-            System.out.println("snack x: " + x);
-            System.out.println("snack y: " + y);
-            GameHelper.sleepSeconds(DefaultProvider.SNACK_TIMING_SECONDS);
-        }
+    public void setRandomPositionSnack() {
+        int x = GameHelper.getRandomNumber(0, window.getGamePanelWidth() - snack.getWidth());
+        int y = GameHelper.getRandomNumber(0, window.getGamePanelHeight() - snack.getHeight());
+        this.snack.setPosition(x, y);
+        System.out.printf("Snack position: (%d, %d)%n", x, y);
     }
 
     private void moveSnake() {
@@ -53,6 +46,8 @@ public class GameEngine implements Runnable {
             System.out.println("Mouse Position: (" + mouseX + ", " + mouseY + ")");
             snake.moveTo(mouseX, mouseY);
             if (snake.getHead().collision(snack)) {
+                setRandomPositionSnack();
+                time = 0;
             }
             GameHelper.sleepMillis(DefaultProvider.SNAKE_MOVEMENT_TIMING_MILLIS);
         }
@@ -60,7 +55,10 @@ public class GameEngine implements Runnable {
 
     private void timer() {
         while (!exit) {
-            if (time == 6) time = 1;
+            if (time >= 5) {
+                setRandomPositionSnack();
+                time = 0;
+            }
             window.setTime(time);
             GameHelper.sleepSeconds(1);
             time++;
