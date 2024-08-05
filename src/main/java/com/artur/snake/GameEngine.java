@@ -51,19 +51,19 @@ public class GameEngine implements Runnable {
             int mouseX = Math.min(window.getMouseX(), window.getGamePanelWidth() - snake.getHeadWidth());
             int mouseY = Math.min(window.getMouseY(), window.getGamePanelHeight() - snake.getHeadHeight());
             System.out.println("Mouse Position: (" + mouseX + ", " + mouseY + ")");
-
             snake.moveTo(mouseX, mouseY);
+            if (snake.getHead().collision(snack)) {
+            }
             GameHelper.sleepMillis(DefaultProvider.SNAKE_MOVEMENT_TIMING_MILLIS);
         }
     }
 
-    private void timer(){
+    private void timer() {
         while (!exit) {
-            if(time == 6) time = 1;
+            if (time == 6) time = 1;
             window.setTime(time);
             GameHelper.sleepSeconds(1);
             time++;
-
         }
     }
 

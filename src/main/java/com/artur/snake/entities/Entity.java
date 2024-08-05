@@ -5,7 +5,7 @@ import com.artur.snake.DefaultProvider;
 
 import javax.swing.*;
 
-public class Entity implements Movable {
+public class Entity {
     protected final JButton component;
     private int _x;
     private int _y;
@@ -26,26 +26,6 @@ public class Entity implements Movable {
         this._velocity = Math.max(velocity, 0);
     }
 
-		@Override
-    public void moveUp() {
-        setPosition(_x, Math.max(_y - _velocity, 0));
-    }
-
-		@Override
-    public void moveDown() {
-        setPosition(_x, Math.max(_y + _velocity, 0));
-    }
-
-		@Override
-    public void moveLeft() {
-        setPosition(Math.max(_x - _velocity, 0), _y);
-    }
-
-		@Override
-    public void moveRight() {
-        setPosition(Math.max(_x + _velocity, 0), _y);
-    }
-
     public int getX() {
         return _x;
     }
@@ -62,7 +42,7 @@ public class Entity implements Movable {
         return this._height;
     }
 
-    public int getVelocity(){
+    public int getVelocity() {
         return this._velocity;
     }
 
@@ -74,6 +54,11 @@ public class Entity implements Movable {
 
     public JButton getComponent() {
         return component;
+    }
+
+    public boolean collision(Entity b) {
+        int distance = (int) Math.sqrt(Math.pow(b.getY() - getY(), 2) + Math.pow(b.getX() - getX(), 2));
+        return distance <= getWidth();
     }
 
 }

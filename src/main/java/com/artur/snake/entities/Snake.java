@@ -27,6 +27,7 @@ public class Snake {
     }
 
     public int getHeadWidth() {
+        //head == cabeza
         if (body.isEmpty())
             return 0;
         return body.get(0).getWidth();
@@ -40,6 +41,13 @@ public class Snake {
 
     public List<Entity> getBody() {
         return body.stream().map(bodyEntity -> (Entity) bodyEntity).toList();
+    }
+
+    public Entity getHead() {
+        if (!body.isEmpty()) {
+            return body.get(0);
+        }
+        return null;
     }
 
 }
