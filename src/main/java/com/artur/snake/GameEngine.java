@@ -10,6 +10,7 @@ public class GameEngine implements Runnable {
     private final Snake snake;
     private final GameWindow window;
     private boolean exit = false;
+    private int time = 0;
     private int mouseX = 0;
     private int mouseY = 0;
 
@@ -24,33 +25,44 @@ public class GameEngine implements Runnable {
     @Override
     public void run() {
         new Thread(this::moveSnake).start();
-        new Thread(this::randomSnack).start();
+        new Thread(this::timer).start();
         while (!exit) {
             System.out.println("soy infinito");
             GameHelper.sleepSeconds(1000);
         }
     }
 
-    private void randomSnack() {
-        while (!exit) {
-            int x = GameHelper.getRandomNumber(0, window.getGamePanelWidth() - snack.getWidth());
-            int y = GameHelper.getRandomNumber(0, window.getGamePanelHeight() - snack.getHeight());
-            this.snack.setPosition(x, y);
-            System.out.println("snack x: " + x);
-            System.out.println("snack y: " + y);
-            System.out.println("snack x: " + x);
-            System.out.println("snack y: " + y);
-            GameHelper.sleepSeconds(DefaultProvider.SNACK_TIMING_SECONDS);
-        }
+    public void setRandomPositionSnack() {
+        int x = GameHelper.getRandomNumber(0, window.getGamePanelWidth() - snack.getWidth());
+        int y = GameHelper.getRandomNumber(0, window.getGamePanelHeight() - snack.getHeight());
+        this.snack.setPosition(x, y);
+        System.out.printf("Snack position: (%d, %d)%n", x, y);
     }
 
     private void moveSnake() {
         while (!exit) {
-            System.out.println("Mouse Position: (" + window.getMouseX() + ", " + window.getMouseY() + ")");
-            mouseX = Math.min(window.getMouseX(), window.getGamePanelWidth() - snake.getHeadWidth());
-            mouseY = Math.min(window.getMouseY(), window.getGamePanelHeight() - snake.getHeadHeight());
+            int mouseX = Math.min(window.getMouseX(), window.getGamePanelWidth() - snake.getHeadWidth());
+            int mouseY = Math.min(window.getMouseY(), window.getGamePanelHeight() - snake.getHeadHeight());
+            System.out.println("Mouse Position: (" + mouseX + ", " + mouseY + ")");
             snake.moveTo(mouseX, mouseY);
+            if (snake.getHead().collision(snack)) {
+                setRandomPositionSnack();
+                window.addEntity(snake.grow());
+                time = 0;
+            }
             GameHelper.sleepMillis(DefaultProvider.SNAKE_MOVEMENT_TIMING_MILLIS);
+        }
+    }
+
+    private void timer() {
+        while (!exit) {
+            if (time >= 5) {
+                setRandomPositionSnack();
+                time = 0;
+            }
+            window.setTime(time);
+            GameHelper.sleepSeconds(1);
+            time++;
         }
     }
 
