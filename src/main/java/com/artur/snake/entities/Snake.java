@@ -71,4 +71,10 @@ public class Snake {
         return part;
     }
 
+    public void remove(int i) {
+        if (i < body.size() && i > 0) {
+            body.remove(i);
+        }
+    }
+
 }

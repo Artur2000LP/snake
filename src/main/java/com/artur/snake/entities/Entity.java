@@ -18,6 +18,9 @@ public class Entity {
         this._width = width;
         this._height = height;
         this._velocity = width;
+        component.setBorderPainted(false);
+        component.setFocusPainted(false);
+        component.setFocusable(false);
         component.setBounds(x, y, width, height);
     }
 
