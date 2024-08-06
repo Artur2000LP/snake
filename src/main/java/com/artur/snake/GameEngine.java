@@ -14,6 +14,7 @@ public class GameEngine implements Runnable {
     private int mouseX = 0;
     private int mouseY = 0;
     private int score = 0;
+    private int death = 0;
 
     public GameEngine(GameWindow window) {
         this.snack = new SnackEntity(5, 5);
@@ -22,7 +23,6 @@ public class GameEngine implements Runnable {
         this.window.addEntity(snack);
         setRandomPositionSnack();
         this.window.addEntities(snake.getBody());
-
     }
 
     @Override
@@ -82,6 +82,7 @@ public class GameEngine implements Runnable {
     public void deathSnake() {
         score = 0;
         time = 0;
+        death++;
         window.setScore(score);
         for (int i = 0; i < snake.getBody().size(); i++) {
             window.removeEntity(snake.getBody().get(i));
@@ -91,7 +92,7 @@ public class GameEngine implements Runnable {
         snake.getHead().setPosition(5, 5);
         window.setMouseX(5);
         window.setMouseY(5);
-
+        window.setDeaths(death);
 
     }
 }
