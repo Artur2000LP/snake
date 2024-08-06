@@ -47,6 +47,7 @@ public class GameEngine implements Runnable {
             snake.moveTo(mouseX, mouseY);
             if (snake.getHead().collision(snack)) {
                 setRandomPositionSnack();
+                window.addEntity(snake.grow());
                 time = 0;
             }
             GameHelper.sleepMillis(DefaultProvider.SNAKE_MOVEMENT_TIMING_MILLIS);

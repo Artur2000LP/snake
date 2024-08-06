@@ -1,8 +1,6 @@
 package com.artur.snake.entities;
 
 
-import com.artur.snake.DefaultProvider;
-
 import javax.swing.*;
 
 public class Entity {
@@ -11,7 +9,7 @@ public class Entity {
     private int _y;
     private final int _width;
     private final int _height;
-    private int _velocity = DefaultProvider.DEFAULT_ENTITY_VELOCITY;
+    private final int _velocity;
 
     public Entity(int x, int y, int width, int height) {
         this.component = new JButton("");
@@ -19,11 +17,8 @@ public class Entity {
         this._y = y;
         this._width = width;
         this._height = height;
+        this._velocity = width;
         component.setBounds(x, y, width, height);
-    }
-
-    public void setVelocity(int velocity) {
-        this._velocity = Math.max(velocity, 0);
     }
 
     public int getX() {
