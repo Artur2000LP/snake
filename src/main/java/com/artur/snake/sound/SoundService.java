@@ -15,7 +15,7 @@ public class SoundService {
 
     public static GameSound getBackground() {
         if (background == null) {
-            background = new GameSound("musicBackground.wav");
+            background = new GameSound("background.wav");
             background.setLoop(true);
         }
         return background;
@@ -30,7 +30,7 @@ public class SoundService {
 
     public static GameSound getSnack() {
         if (snack == null) {
-            snack = new GameSound("eatSnack.wav");
+            snack = new GameSound("appearanceSnack.wav");
         }
         return snack;
     }
