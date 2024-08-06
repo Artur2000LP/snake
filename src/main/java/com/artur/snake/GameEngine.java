@@ -2,6 +2,7 @@ package com.artur.snake;
 
 import com.artur.snake.entities.SnackEntity;
 import com.artur.snake.entities.Snake;
+import com.artur.snake.sound.SoundService;
 
 
 public class GameEngine implements Runnable {
@@ -29,6 +30,7 @@ public class GameEngine implements Runnable {
     public void run() {
         new Thread(this::moveSnake).start();
         new Thread(this::timer).start();
+        SoundService.getBackground().play();
         while (!exit) {
             System.out.println("soy infinito");
             GameHelper.sleepSeconds(1000);
@@ -40,6 +42,7 @@ public class GameEngine implements Runnable {
         int y = GameHelper.getRandomNumber(0, window.getGamePanelHeight() - snack.getHeight());
         this.snack.setPosition(x, y);
         System.out.printf("Snack position: (%d, %d)%n", x, y);
+        SoundService.getSnack().play();
     }
 
     private void moveSnake() {
@@ -54,6 +57,7 @@ public class GameEngine implements Runnable {
                 time = 0;
                 score++;
                 window.setScore(score);
+                SoundService.getEat().play();
             }
 
             if (snake.getHead().getX() <= 1 ||
@@ -93,6 +97,7 @@ public class GameEngine implements Runnable {
         window.setMouseX(5);
         window.setMouseY(5);
         window.setDeaths(death);
+        SoundService.getCollision().play();
 
     }
 }

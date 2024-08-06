@@ -6,5 +6,4 @@ public class Main {
         GameEngine engine = new GameEngine(window);
         new Thread(engine).start();
     }
-
 }
