@@ -35,8 +35,8 @@ public class GameWindow extends JFrame implements MouseMotionListener {
         repaint();
     }
 
-    public void addEntities(List<Entity> entities){
-        for(Entity entity : entities){
+    public void addEntities(List<Entity> entities) {
+        for (Entity entity : entities) {
             addEntity(entity);
         }
     }
@@ -55,6 +55,14 @@ public class GameWindow extends JFrame implements MouseMotionListener {
 
     public int getMouseY() {
         return mouseY;
+    }
+
+    public void setMouseX(int x) {
+        mouseX = x;
+    }
+
+    public void setMouseY(int y) {
+        mouseY = y;
     }
 
     private void configWindow() {
@@ -93,7 +101,8 @@ public class GameWindow extends JFrame implements MouseMotionListener {
     }
 
     @Override
-    public void mouseDragged(MouseEvent e) {}
+    public void mouseDragged(MouseEvent e) {
+    }
 
     public void setTime(int time) {
         timeLabel.setText(String.valueOf(time));
@@ -103,6 +112,11 @@ public class GameWindow extends JFrame implements MouseMotionListener {
         scoreLabel.setText("Puntos: " + score);
     }
 
+    public void removeEntity(Entity entity) {
+        this.gamePanel.remove(entity.getComponent());
+        gamePanel.revalidate();
+        gamePanel.repaint();
+    }
 }
 
 
