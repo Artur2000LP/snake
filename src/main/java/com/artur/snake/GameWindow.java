@@ -13,7 +13,7 @@ import java.util.List;
 public class GameWindow extends JFrame implements MouseMotionListener {
 
     private final JLabel deathsLabel = new JLabel("Muertes: ");
-    private final JLabel scoreLabel = new JLabel("Puntos: ");
+    private final JLabel scoreLabel = new JLabel("Puntos: 0");
     private final JLabel timeLabel = new JLabel("0");
     private final JPanel gamePanel = new JPanel();
 
@@ -97,6 +97,10 @@ public class GameWindow extends JFrame implements MouseMotionListener {
 
     public void setTime(int time) {
         timeLabel.setText(String.valueOf(time));
+    }
+
+    public void setScore(int score) {
+        scoreLabel.setText("Puntos: " + score);
     }
 
 }

@@ -13,13 +13,16 @@ public class GameEngine implements Runnable {
     private int time = 0;
     private int mouseX = 0;
     private int mouseY = 0;
+    private int score =0;
 
     public GameEngine(GameWindow window) {
         this.snack = new SnackEntity(0, 0);
         this.snake = new Snake();
         this.window = window;
         this.window.addEntity(snack);
+        setRandomPositionSnack();
         this.window.addEntities(snake.getBody());
+
     }
 
     @Override
@@ -49,6 +52,8 @@ public class GameEngine implements Runnable {
                 setRandomPositionSnack();
                 window.addEntity(snake.grow());
                 time = 0;
+                score++;
+                window.setScore(score);
             }
             GameHelper.sleepMillis(DefaultProvider.SNAKE_MOVEMENT_TIMING_MILLIS);
         }
