@@ -1,4 +1,5 @@
-![Captura de pantalla 2024-10-24 205201](https://github.com/user-attachments/assets/a26bd266-4fcf-42e6-99dc-37319b129040)
+
+![Captura de pantalla 2024-10-24 205201](https://github.com/user-attachments/assets/30cf5e48-7dd3-4e57-9725-a5b93880b95c)
 
 construir la interfaz grafica
 #1
